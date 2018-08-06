@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,8 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using MyDiary.CoreApi.Helpers;
 using MyDiary.CoreApi.Models;
@@ -32,6 +27,15 @@ namespace MyDiary.CoreApi
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
+            services.AddCors(options =>
+            {
+                options.AddPolicy(ConstantsHelper.CorsPolicy,
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<DbContext, ApplicationContext>();
             services.AddTransient<IRepository<Note>, NoteRepository>();
@@ -60,7 +64,6 @@ namespace MyDiary.CoreApi
                         ClockSkew = TimeSpan.Zero // remove delay of token when expire
                     };
                 });
-
             services.AddMvc();
         }
 
@@ -72,12 +75,7 @@ namespace MyDiary.CoreApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(
-                builder => builder
-                    .AllowAnyOrigin()
-                    .AllowAnyHeader()
-                    .AllowAnyMethod()
-            );
+            app.UseCors(ConstantsHelper.CorsPolicy);
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();
