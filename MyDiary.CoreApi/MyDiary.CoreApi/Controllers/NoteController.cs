@@ -62,7 +62,7 @@ namespace MyDiary.CoreApi.Controllers
 
                 await _repository.CreateAsync(note);
                 await _repository.SaveAsync();
-                return Ok(note);
+                return Ok();
             }
             return BadRequest();
         }
