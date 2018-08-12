@@ -62,7 +62,12 @@ namespace MyDiary.CoreApi.Controllers
 
                 await _repository.CreateAsync(note);
                 await _repository.SaveAsync();
-                return Ok();
+
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = null;
+                }
+                return Ok(note);
             }
             return BadRequest();
         }

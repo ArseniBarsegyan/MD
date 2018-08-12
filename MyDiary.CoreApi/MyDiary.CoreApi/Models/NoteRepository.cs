@@ -28,8 +28,11 @@ namespace MyDiary.CoreApi.Models
         public async Task<Note> GetByIdAsync(int? id)
         {
             var note = await DbSet.FirstOrDefaultAsync(x => x.Id == id);
-            var photos = await _dbContext.Entry(note).Collection(x => x.Photos).Query().ToListAsync();
-            note.Photos = photos;
+            if (note != null)
+            {
+                var photos = await _dbContext.Entry(note).Collection(x => x.Photos).Query().ToListAsync();
+                note.Photos = photos;
+            }
             return note;
         }
 
