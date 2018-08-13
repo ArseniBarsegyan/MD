@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 
-namespace MyDiary.Data
+namespace MyDiary.CoreApi.Models
 {
     public interface IRepository<TEntity> where TEntity : Entity
     {

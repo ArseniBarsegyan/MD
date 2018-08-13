@@ -10,8 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MyDiary.CoreApi.Helpers;
-using MyDiary.Data;
-using MyDiary.Identity;
+using MyDiary.CoreApi.Models;
 
 namespace MyDiary.CoreApi
 {
@@ -37,15 +36,12 @@ namespace MyDiary.CoreApi
                     .AllowCredentials());
             });
 
-            var opt = new DbContextOptionsBuilder().UseSqlServer(Configuration.GetConnectionString(ConstantsHelper.DefaultConnection));
-            services.AddTransient(s => new AppIdentityDbContext(opt.Options, "dbo"));
-
-            //services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
-            //services.AddScoped<DbContext, ApplicationContext>();
+            services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<DbContext, ApplicationContext>();
             services.AddTransient<IRepository<Note>, NoteRepository>();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddEntityFrameworkStores<ApplicationContext>()
                 .AddDefaultTokenProviders();
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
@@ -72,7 +68,7 @@ namespace MyDiary.CoreApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, AppIdentityDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationContext dbContext)
         {
             if (env.IsDevelopment())
             {
