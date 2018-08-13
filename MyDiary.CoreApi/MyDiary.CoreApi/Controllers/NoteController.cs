@@ -2,7 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MyDiary.CoreApi.Models;
+using MyDiary.Data;
+using MyDiary.Identity;
 
 namespace MyDiary.CoreApi.Controllers
 {
