@@ -1,8 +1,5 @@
-﻿namespace MyDiary.CoreApi.Models
+﻿namespace MyDiary.Data
 {
-    /// <summary>
-    /// Photos table in database.
-    /// </summary>
     public class Photo : Entity
     {
         public string Name { get; set; }

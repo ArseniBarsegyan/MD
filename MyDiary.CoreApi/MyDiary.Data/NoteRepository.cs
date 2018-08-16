@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyDiary.CoreApi.Models
+namespace MyDiary.Data
 {
     /// <summary>
     /// Implementation of <see cref="IRepository{TEntity}" />.

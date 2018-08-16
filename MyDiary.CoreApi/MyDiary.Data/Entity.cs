@@ -1,4 +1,4 @@
-﻿namespace MyDiary.CoreApi.Models
+﻿namespace MyDiary.Data
 {
     public class Entity
     {

@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MyDiary.CoreApi.Helpers;
-using MyDiary.CoreApi.Models;
+using MyDiary.Data;
 
 namespace MyDiary.CoreApi
 {

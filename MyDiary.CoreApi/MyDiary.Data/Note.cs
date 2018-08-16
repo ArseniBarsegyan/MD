@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MyDiary.CoreApi.Models
+namespace MyDiary.Data
 {
-    /// <summary>
-    /// Notes table in database.
-    /// </summary>
     public class Note : Entity
     {
         public string Description { get; set; }

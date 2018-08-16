@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using MyDiary.CoreApi.Models;
+using MyDiary.Data;
 using System;
 
 namespace MyDiary.CoreApi.Migrations

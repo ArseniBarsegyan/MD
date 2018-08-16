@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MyDiary.CoreApi.Models
+namespace MyDiary.Data
 {
     /// <summary>
     /// ApplicationContext class.
