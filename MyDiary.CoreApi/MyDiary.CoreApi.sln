@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDiary.Data", "MyDiary.Dat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{6878BEAF-B2AF-498D-A413-F395FBCCDF8B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDiary.Migrations", "MyDiary.Migrations\MyDiary.Migrations.csproj", "{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{BCA379C6-31FE-4BF3-8615-1D5784D34712}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCA379C6-31FE-4BF3-8615-1D5784D34712}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCA379C6-31FE-4BF3-8615-1D5784D34712}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -37,6 +43,7 @@ Global
 		{8329E258-78E1-424B-99FB-BED006A64CCF} = {0CC1F81C-0F44-4987-A12B-B46A7D097F2B}
 		{691DCA4E-C4E8-4B29-AE45-186F6C2208D8} = {0CC1F81C-0F44-4987-A12B-B46A7D097F2B}
 		{BCA379C6-31FE-4BF3-8615-1D5784D34712} = {8329E258-78E1-424B-99FB-BED006A64CCF}
+		{C2072DAC-44E5-41D1-BE8E-1B0CBB2AB712} = {6878BEAF-B2AF-498D-A413-F395FBCCDF8B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E21987AD-62A9-4BE5-9CC1-973623C1FB60}
