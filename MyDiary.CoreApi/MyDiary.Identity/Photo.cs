@@ -1,4 +1,6 @@
-﻿namespace MyDiary.Data
+﻿using MyDiary.Data;
+
+namespace MyDiary.Identity
 {
     public class Photo : Entity
     {

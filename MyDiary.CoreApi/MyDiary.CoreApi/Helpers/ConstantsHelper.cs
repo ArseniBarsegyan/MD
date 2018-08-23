@@ -2,6 +2,7 @@
 {
     public static class ConstantsHelper
     {
+        public const string ContextShemaName = "identity";
         public const string CorsPolicy = "CorsPolicy";
         public const string DefaultConnection = "DefaultConnection";
         public const string JwtIssuer = "JwtIssuer";

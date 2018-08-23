@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyDiary.Data;
+using MyDiary.Identity;
 
 namespace MyDiary.CoreApi.Controllers
 {
@@ -11,16 +13,19 @@ namespace MyDiary.CoreApi.Controllers
     public class NoteController : Controller
     {
         private readonly IRepository<Note> _repository;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public NoteController(IRepository<Note> repository)
+        public NoteController(IRepository<Note> repository, UserManager<IdentityUser> userManager)
         {
             _repository = repository;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public IEnumerable<Note> Get()
         {
-            var allNotes = _repository.GetAll().ToList();
+            var userId = _userManager.GetUserId(User);
+            var allNotes = _repository.GetAll(userId).ToList(); 
             foreach (var note in allNotes)
             {
                 foreach (var photo in note.Photos)

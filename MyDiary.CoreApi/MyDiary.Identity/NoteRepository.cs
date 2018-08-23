@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MyDiary.Data;
 
-namespace MyDiary.Data
+namespace MyDiary.Identity
 {
     /// <summary>
     /// Implementation of <see cref="IRepository{TEntity}" />.
@@ -20,9 +21,9 @@ namespace MyDiary.Data
 
         protected DbSet<Note> DbSet => _dbContext.Set<Note>();
 
-        public IQueryable<Note> GetAll()
+        public IQueryable<Note> GetAll(string userId)
         {
-            return DbSet.Include(x => x.Photos);
+            return DbSet.Where(x => x.UserId == userId).Include(x => x.Photos);
         }
 
         public async Task<Note> GetByIdAsync(int? id)

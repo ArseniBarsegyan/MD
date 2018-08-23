@@ -39,7 +39,10 @@ namespace MyDiary.Migrations
             connectionString = Configuration.GetConnectionString("ReleaseVersionConnection");
 #endif
 
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<BaseContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(connectionString));
         }
 
