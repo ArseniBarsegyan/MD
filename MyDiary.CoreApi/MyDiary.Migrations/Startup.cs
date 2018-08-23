@@ -32,8 +32,15 @@ namespace MyDiary.Migrations
         /// <param name="services">The services.</param>
         public virtual void ConfigureServices(IServiceCollection services)
         {
+            string connectionString;
+#if DEBUG
+            connectionString = Configuration.GetConnectionString("DefaultConnection");
+#else
+            connectionString = Configuration.GetConnectionString("ReleaseVersionConnection");
+#endif
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connectionString));
         }
 
         /// <summary>

@@ -26,7 +26,13 @@ namespace MyDiary.CoreApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
+            string connectionString;
+#if DEBUG
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
+#else
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.ReleaseVersionConnection);
+#endif
+
             services.AddCors(options =>
             {
                 options.AddPolicy(ConstantsHelper.CorsPolicy,
