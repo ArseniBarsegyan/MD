@@ -10,17 +10,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MyDiary.CoreApi.Dto;
+using MyDiary.Identity;
 
 namespace MyDiary.CoreApi.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager,
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
             IConfiguration configuration)
         {
             _userManager = userManager;
@@ -54,7 +55,7 @@ namespace MyDiary.CoreApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new IdentityUser
+            var user = new AppUser
             {
                 UserName = model.Email,
                 Email = model.Email
@@ -69,7 +70,7 @@ namespace MyDiary.CoreApi.Controllers
             return BadRequest();
         }
 
-        private object GenerateJwtToken(string email, IdentityUser user)
+        private object GenerateJwtToken(string email, AppUser user)
         {
             var claims = new List<Claim>
             {

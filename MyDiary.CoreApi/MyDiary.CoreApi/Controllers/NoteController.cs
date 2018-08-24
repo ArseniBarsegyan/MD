@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyDiary.Data;
@@ -13,9 +14,9 @@ namespace MyDiary.CoreApi.Controllers
     public class NoteController : Controller
     {
         private readonly IRepository<Note> _repository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public NoteController(IRepository<Note> repository, UserManager<IdentityUser> userManager)
+        public NoteController(IRepository<Note> repository, UserManager<AppUser> userManager)
         {
             _repository = repository;
             _userManager = userManager;
@@ -65,6 +66,8 @@ namespace MyDiary.CoreApi.Controllers
                     photo.Note = note;
                 }
 
+                var userId = _userManager.GetUserId(User);
+                note.UserId = userId;
                 await _repository.CreateAsync(note);
                 await _repository.SaveAsync();
 
