@@ -33,7 +33,7 @@ namespace MyDiary.CoreApi.Controllers
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             if (!ModelState.IsValid)
-            {
+            {   
                 return BadRequest(ModelState);
             }
 
