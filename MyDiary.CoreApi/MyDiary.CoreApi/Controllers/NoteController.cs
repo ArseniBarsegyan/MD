@@ -26,7 +26,7 @@ namespace MyDiary.CoreApi.Controllers
         public IEnumerable<Note> Get()
         {
             var userId = _userManager.GetUserId(User);
-            var allNotes = _repository.GetAll(userId).ToList(); 
+            var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Date).ToList(); 
             foreach (var note in allNotes)
             {
                 foreach (var photo in note.Photos)
