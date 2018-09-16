@@ -52,31 +52,42 @@ namespace MD.CoreApi
                 return new NoteRepository(context);
             });
 
-            services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDbContext>()
-                .AddDefaultTokenProviders();
+            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
-            services
-                .AddAuthentication(options =>
+            services.AddAuthentication(ConstantsHelper.AuthenticationType) // it is a Bearer token
+                .AddIdentityServerAuthentication(options =>
                 {
-                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(cfg =>
-                {
-                    cfg.RequireHttpsMetadata = false;
-                    cfg.SaveToken = true;
-                    cfg.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidIssuer = Configuration[ConstantsHelper.JwtIssuer],
-                        ValidAudience = Configuration[ConstantsHelper.JwtIssuer],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConstantsHelper.JwtKey])),
-                        ClockSkew = TimeSpan.Zero // remove delay of token when expire
-                    };
+                    options.Authority = ConstantsHelper.IdentityServerUrl; //Identity Server URL
+                    options.RequireHttpsMetadata = false; // make it false since we are not using https
+                    options.ApiName = ConstantsHelper.ApiName; //api name which should be registered in IdentityServer
                 });
+
             services.AddMvc();
+
+            //services.AddIdentity<AppUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<AppIdentityDbContext>()
+            //    .AddDefaultTokenProviders();
+
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear(); // => remove default claims
+            //services
+            //    .AddAuthentication(options =>
+            //    {
+            //        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    })
+            //    .AddJwtBearer(cfg =>
+            //    {
+            //        cfg.RequireHttpsMetadata = false;
+            //        cfg.SaveToken = true;
+            //        cfg.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            ValidIssuer = Configuration[ConstantsHelper.JwtIssuer],
+            //            ValidAudience = Configuration[ConstantsHelper.JwtIssuer],
+            //            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration[ConstantsHelper.JwtKey])),
+            //            ClockSkew = TimeSpan.Zero // remove delay of token when expire
+            //        };
+            //    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

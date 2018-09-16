@@ -1,40 +1,47 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MD.Data;
 using MD.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace MD.CoreApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/notes")]
+    [Authorize]
     public class NoteController : Controller
     {
         private readonly IRepository<Note> _repository;
-        private readonly UserManager<AppUser> _userManager;
 
-        public NoteController(IRepository<Note> repository, UserManager<AppUser> userManager)
+        public NoteController(IRepository<Note> repository)
         {
             _repository = repository;
-            _userManager = userManager;
         }
 
+        //[HttpGet]
+        //public IEnumerable<Note> Get()
+        //{
+        //    var userId = _userManager.GetUserId(User);
+        //    var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Id).ToList(); 
+        //    foreach (var note in allNotes)
+        //    {
+        //        foreach (var photo in note.Photos)
+        //        {
+        //            photo.Note = null;
+        //        }
+        //    }
+        //    return allNotes;
+        //}
+
         [HttpGet]
-        public IEnumerable<Note> Get()
+        public IEnumerable<string> Get()
         {
-            var userId = _userManager.GetUserId(User);
-            var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Id).ToList(); 
-            foreach (var note in allNotes)
-            {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
-            }
-            return allNotes;
+            return new List<string>{"test"};
         }
 
         [HttpGet("{id}")]
@@ -56,29 +63,29 @@ namespace MD.CoreApi.Controllers
             return Ok(note);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody]Note note)
-        {
-            if (ModelState.IsValid)
-            {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = note;
-                }
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody]Note note)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        foreach (var photo in note.Photos)
+        //        {
+        //            photo.Note = note;
+        //        }
 
-                var userId = _userManager.GetUserId(User);
-                note.UserId = userId;
-                await _repository.CreateAsync(note);
-                await _repository.SaveAsync();
+        //        var userId = _userManager.GetUserId(User);
+        //        note.UserId = userId;
+        //        await _repository.CreateAsync(note);
+        //        await _repository.SaveAsync();
 
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
-                return Ok(note);
-            }
-            return BadRequest();
-        }
+        //        foreach (var photo in note.Photos)
+        //        {
+        //            photo.Note = null;
+        //        }
+        //        return Ok(note);
+        //    }
+        //    return BadRequest();
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]Note note)
