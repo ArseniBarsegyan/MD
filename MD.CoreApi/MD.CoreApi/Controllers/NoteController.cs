@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,25 +24,19 @@ namespace MD.CoreApi.Controllers
             _repository = repository;
         }
 
-        //[HttpGet]
-        //public IEnumerable<Note> Get()
-        //{
-        //    var userId = _userManager.GetUserId(User);
-        //    var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Id).ToList(); 
-        //    foreach (var note in allNotes)
-        //    {
-        //        foreach (var photo in note.Photos)
-        //        {
-        //            photo.Note = null;
-        //        }
-        //    }
-        //    return allNotes;
-        //}
-
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Note> Get()
         {
-            return new List<string>{"test"};
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+            var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Id).ToList();
+            foreach (var note in allNotes)
+            {
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = null;
+                }
+            }
+            return allNotes;
         }
 
         [HttpGet("{id}")]
