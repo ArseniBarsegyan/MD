@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using IdentityModel;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MD.Data;
 using MD.Identity;
-using Microsoft.AspNetCore.Http;
 
 namespace MD.CoreApi.Controllers
 {
@@ -58,29 +54,29 @@ namespace MD.CoreApi.Controllers
             return Ok(note);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody]Note note)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        foreach (var photo in note.Photos)
-        //        {
-        //            photo.Note = note;
-        //        }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = note;
+                }
 
-        //        var userId = _userManager.GetUserId(User);
-        //        note.UserId = userId;
-        //        await _repository.CreateAsync(note);
-        //        await _repository.SaveAsync();
+                var userId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+                note.UserId = userId;
+                await _repository.CreateAsync(note);
+                await _repository.SaveAsync();
 
-        //        foreach (var photo in note.Photos)
-        //        {
-        //            photo.Note = null;
-        //        }
-        //        return Ok(note);
-        //    }
-        //    return BadRequest();
-        //}
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = null;
+                }
+                return Ok(note);
+            }
+            return BadRequest();
+        }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]Note note)
