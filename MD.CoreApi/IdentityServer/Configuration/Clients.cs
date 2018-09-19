@@ -33,6 +33,17 @@ namespace IdentityServer.Configuration
                     AllowAccessTokensViaBrowser = true
                 },
 
+                new Client
+                {
+                    ClientId = "XamarinClient",
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    ClientSecrets =
+                    {
+                        new Secret("MDXamarinClientSecretKey".Sha256())
+                    },
+                    AllowedScopes = { "MD.CoreApi" }
+                },
+
                 // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
                 {
