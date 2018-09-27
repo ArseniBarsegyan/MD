@@ -1,5 +1,5 @@
 # MD.CoreApi
-.Net Core Web API project
+.Net Core Web API project.
 This part consists of:
 - Separated DAL-layer and project for Migrations
 - Identity layer for Identity framework
