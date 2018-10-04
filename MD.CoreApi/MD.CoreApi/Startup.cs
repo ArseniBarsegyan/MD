@@ -33,7 +33,6 @@ namespace MD.CoreApi
 #else
             connectionString = Configuration.GetConnectionString(ConstantsHelper.ReleaseVersionConnection);
 #endif
-
             services.AddCors(options =>
             {
                 options.AddPolicy(ConstantsHelper.CorsPolicy,
