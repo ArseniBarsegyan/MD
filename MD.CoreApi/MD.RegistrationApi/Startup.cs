@@ -64,15 +64,15 @@ namespace MD.RegistrationApi
             {
                 app.UseHsts();
             }
-            
-            // ===== Use Authentication ======
+
+            app.UseCors("CorsPolicy");
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            // ===== Create tables ======
             dbContext.Database.EnsureCreated();
-            app.UseCors("CorsPolicy");
         }
     }
 }

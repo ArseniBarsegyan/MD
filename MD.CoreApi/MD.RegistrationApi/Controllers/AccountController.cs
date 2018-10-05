@@ -37,6 +37,11 @@ namespace MD.RegistrationApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var user = new AppUser
             {
                 UserName = model.Email,
