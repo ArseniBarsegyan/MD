@@ -19,21 +19,18 @@ namespace MD.RegistrationApi.Controllers
             _userManager = userManager;
         }
 
-        // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<AppUser>> Get()
         {
             return _userManager.Users.ToArray();
         }
 
-        // GET api/values/5
         [HttpGet("{id}")]
         public ActionResult<AppUser> Get(string id)
         {
             return _userManager.Users.FirstOrDefault(x => x.Id == id);
         }
 
-        // POST api/values
         [HttpPost]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
