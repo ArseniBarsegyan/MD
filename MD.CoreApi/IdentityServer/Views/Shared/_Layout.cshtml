@@ -25,41 +25,32 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">Login</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
-                    @if (!string.IsNullOrWhiteSpace(name))
-                    {
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
-                            </ul>
-                        </li>
-                    }
+<div class="topnav">
+    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+    
+    @if (!string.IsNullOrWhiteSpace(name))
+    {
+        <ul class="topnav-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    Hello, @name! <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a asp-action="Logout" asp-controller="Account">Logout</a></li>
                 </ul>
-            </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-    </div>
+            </li>
+        </ul>
+    }
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<div class="container body-content">
+    @RenderBody()
+</div>
 
-    @RenderSection("Scripts", required: false)
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>
