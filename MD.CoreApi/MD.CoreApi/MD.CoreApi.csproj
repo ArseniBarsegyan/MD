@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MD.Data\MD.Data.csproj" />
+    <ProjectReference Include="..\MD.Helpers\MD.Helpers.csproj" />
     <ProjectReference Include="..\MD.Identity\MD.Identity.csproj" />
   </ItemGroup>
 

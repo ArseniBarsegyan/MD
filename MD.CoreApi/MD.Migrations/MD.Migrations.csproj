@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MD.Data\MD.Data.csproj" />
+    <ProjectReference Include="..\MD.Helpers\MD.Helpers.csproj" />
     <ProjectReference Include="..\MD.Identity\MD.Identity.csproj" />
   </ItemGroup>
 

@@ -14,7 +14,7 @@ namespace MD.Migrations
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         /// <summary>
@@ -22,9 +22,8 @@ namespace MD.Migrations
         /// </summary>
         /// <param name="args">The arguments.</param>
         /// <returns>IWebHost</returns>
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+                .UseStartup<Startup>();
     }
 }

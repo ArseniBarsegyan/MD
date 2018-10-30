@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IdentityServer4.AspNetIdentity\IdentityServer4.AspNetIdentity.csproj" />
+    <ProjectReference Include="..\MD.Helpers\MD.Helpers.csproj" />
     <ProjectReference Include="..\MD.Identity\MD.Identity.csproj" />
   </ItemGroup>
 

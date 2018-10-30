@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityModel;
 using IdentityServer4.Models;
+using MD.Helpers;
 
 namespace IdentityServer.Configuration
 {
@@ -24,7 +25,7 @@ namespace IdentityServer.Configuration
         {
             var apiResources = new List<ApiResource>
             {
-                new ApiResource("MD.CoreApi", "MD.CoreApi")
+                new ApiResource(ConstantsHelper.ApiName, ConstantsHelper.ApiName)
             };
             return apiResources;
         }

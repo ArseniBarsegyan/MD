@@ -1,5 +1,6 @@
 ﻿using IdentityServer.Configuration;
 using IdentityServer4.AspNetIdentity;
+using MD.Helpers;
 using MD.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,9 +34,9 @@ namespace IdentityServer
 
             string connectionString;
 #if DEBUG
-            connectionString = Configuration.GetConnectionString("DefaultConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
 #else
-            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.ReleaseVersionConnection);
 #endif
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(connectionString));

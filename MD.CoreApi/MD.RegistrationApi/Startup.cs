@@ -1,4 +1,5 @@
-﻿using MD.Identity;
+﻿using MD.Helpers;
+using MD.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -23,13 +24,13 @@ namespace MD.RegistrationApi
         {
             string connectionString;
 #if DEBUG
-            connectionString = Configuration.GetConnectionString("DefaultConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
 #else
-            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.ReleaseVersionConnection);
 #endif
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy",
+                options.AddPolicy(ConstantsHelper.CorsPolicy,
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
@@ -37,7 +38,7 @@ namespace MD.RegistrationApi
             });
 
             var opt = new DbContextOptionsBuilder().UseSqlServer(connectionString);
-            services.AddTransient(s => new AppIdentityDbContext(opt.Options, "dbo"));
+            services.AddTransient(s => new AppIdentityDbContext(opt.Options, ConstantsHelper.ContextShemaName));
 
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -58,7 +59,7 @@ namespace MD.RegistrationApi
                 app.UseHsts();
             }
 
-            app.UseCors("CorsPolicy");
+            app.UseCors(ConstantsHelper.CorsPolicy);
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseAuthentication();

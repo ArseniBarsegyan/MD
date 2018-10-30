@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MD.Migrations.Context;
+using MD.Helpers;
 
 namespace MD.Migrations
 {
@@ -33,9 +34,9 @@ namespace MD.Migrations
         {
             string connectionString;
 #if DEBUG
-            connectionString = Configuration.GetConnectionString("DefaultConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.DefaultConnection);
 #else
-            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
+            connectionString = Configuration.GetConnectionString(ConstantsHelper.ReleaseVersionConnection);
 #endif
 
             services.AddDbContext<BaseContext>(options =>

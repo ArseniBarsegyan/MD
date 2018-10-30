@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using IdentityServer4;
 using IdentityServer4.Models;
+using MD.Helpers;
 
 namespace IdentityServer.Configuration
 {
@@ -23,32 +24,33 @@ namespace IdentityServer.Configuration
 
                 // Angular client
                 new Client {
-                    ClientId = "Angular_client",
-                    ClientName = "Angular 4 Client",
+                    ClientId = ConstantsHelper.AngularClientId,
+                    ClientName = ConstantsHelper.AngularClientName,
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = new List<string> { "openid", "profile", "MD.CoreApi", "custom.profile" },
-                    RedirectUris = new List<string> { "http://localhost:4200/auth-callback" },
-                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/logout-callback" },
-                    AllowedCorsOrigins = new List<string> { "http://localhost:4200" },
+                    AllowedScopes = ConstantsHelper.AngularClientAllowedScopes,
+                    RedirectUris = ConstantsHelper.AngularClientRedirectUris,
+                    PostLogoutRedirectUris = ConstantsHelper.AngularClientPostLogoutRedirectUris,
+                    AllowedCorsOrigins = ConstantsHelper.AngularClientAllowedCorsOrigins,
                     AllowAccessTokensViaBrowser = true
                 },
 
+                // Xamarin client
                 new Client
                 {
-                    ClientId = "XamarinClient",
+                    ClientId = ConstantsHelper.XamarinClientId,
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets =
                     {
                         new Secret("MDXamarinClientSecretKey".Sha256())
                     },
-                    AllowedScopes = { "MD.CoreApi" }
+                    AllowedScopes = { ConstantsHelper.ApiName }
                 },
 
                 // OpenID Connect hybrid flow and client credentials client (MVC)
                 new Client
                 {
-                    ClientId = "MDMVC",
-                    ClientName = "MVC Client",
+                    ClientId = ConstantsHelper.MvcClientId,
+                    ClientName = ConstantsHelper.MvcClientName,
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
                     RequireConsent = true,
@@ -58,14 +60,14 @@ namespace IdentityServer.Configuration
                         new Secret("MDSecretKey".Sha256())
                     },
 
-                    RedirectUris = { "http://localhost:51866/signin-oidc" },
-                    PostLogoutRedirectUris = { "http://localhost:51866/signout-callback-oidc" },
+                    RedirectUris = ConstantsHelper.MvcClientRedirectUris,
+                    PostLogoutRedirectUris = ConstantsHelper.MvcClientPostLogoutRedirectUris,
 
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "MD.CoreApi"
+                        ConstantsHelper.ApiName
                     },
                     AllowOfflineAccess = true
                 }

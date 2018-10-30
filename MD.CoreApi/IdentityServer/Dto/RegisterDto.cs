@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using IdentityServer.Helpers;
+﻿using MD.Helpers;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.Dto
 {
