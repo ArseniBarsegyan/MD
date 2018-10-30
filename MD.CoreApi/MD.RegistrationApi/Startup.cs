@@ -25,7 +25,7 @@ namespace MD.RegistrationApi
 #if DEBUG
             connectionString = Configuration.GetConnectionString("DefaultConnection");
 #else
-            connectionString = Configuration.GetConnectionString("ReleaseVersionConnection");
+            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
 #endif
             services.AddCors(options =>
             {

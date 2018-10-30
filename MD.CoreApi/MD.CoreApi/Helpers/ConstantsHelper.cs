@@ -11,6 +11,6 @@
         // public const string JwtKey = "JwtKey";
         public const string PasswordErrorMessage = "PASSWORD_MIN_LENGTH";
         public const string IdentityServerUrl = "http://localhost:51866";
-        public const string ReleaseVersionConnection = "ReleaseVersionConnection";
+        public const string ReleaseVersionConnection = "AzureDatabaseConnection";
     }
 }

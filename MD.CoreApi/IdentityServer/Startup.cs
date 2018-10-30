@@ -35,7 +35,7 @@ namespace IdentityServer
 #if DEBUG
             connectionString = Configuration.GetConnectionString("DefaultConnection");
 #else
-            connectionString = Configuration.GetConnectionString("ReleaseVersionConnection");
+            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
 #endif
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(connectionString));

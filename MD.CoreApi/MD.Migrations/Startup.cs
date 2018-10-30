@@ -35,7 +35,7 @@ namespace MD.Migrations
 #if DEBUG
             connectionString = Configuration.GetConnectionString("DefaultConnection");
 #else
-            connectionString = Configuration.GetConnectionString("ReleaseVersionConnection");
+            connectionString = Configuration.GetConnectionString("AzureDatabaseConnection");
 #endif
 
             services.AddDbContext<BaseContext>(options =>

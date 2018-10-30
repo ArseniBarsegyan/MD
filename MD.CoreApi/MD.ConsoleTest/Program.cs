@@ -13,7 +13,7 @@ namespace MD.ConsoleTest
         private static async Task MainAsync()
         {
             //Discover the identity server
-            var identityServer = await DiscoveryClient.GetAsync("http://localhost:51866/");
+            var identityServer = await DiscoveryClient.GetAsync("https://localhost:44350/.well-known/openid-configuration");
 
             if (identityServer.IsError)
             {
@@ -29,7 +29,7 @@ namespace MD.ConsoleTest
             HttpClient client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("http://localhost:49790/api/notes");
+            var response = await client.GetAsync("https://localhost:44350/api/notes");
             var content = await response.Content.ReadAsStringAsync();
             Console.WriteLine(JArray.Parse(content));
             Console.ReadKey();
