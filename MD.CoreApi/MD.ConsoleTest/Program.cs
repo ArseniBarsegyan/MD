@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using IdentityModel.Client;
+using MD.Helpers;
 using Newtonsoft.Json.Linq;
 
 namespace MD.ConsoleTest
@@ -13,7 +14,7 @@ namespace MD.ConsoleTest
         private static async Task MainAsync()
         {
             //Discover the identity server
-            var identityServer = await DiscoveryClient.GetAsync("https://localhost:44350/.well-known/openid-configuration");
+            var identityServer = await DiscoveryClient.GetAsync(ConstantsHelper.IdentityServerUrl);
 
             if (identityServer.IsError)
             {
@@ -29,7 +30,7 @@ namespace MD.ConsoleTest
             HttpClient client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync("https://localhost:44350/api/notes");
+            var response = await client.GetAsync(ConstantsHelper.ApiUrl);
             var content = await response.Content.ReadAsStringAsync();
             Console.WriteLine(JArray.Parse(content));
             Console.ReadKey();

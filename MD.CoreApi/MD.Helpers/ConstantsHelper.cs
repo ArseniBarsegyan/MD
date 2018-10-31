@@ -11,6 +11,7 @@ namespace MD.Helpers
         public const string PasswordErrorMessage = "PASSWORD_MIN_LENGTH";
         public const string PasswordIncorrect = "Password incorrect";
 
+        public const string ApiUrl = "https://localhost:44350/api/notes";
         public const string ApiName = "MD.CoreApi";
         public const string AuthenticationType = "Bearer";
         public const string CorsPolicy = "CorsPolicy";
