@@ -9,6 +9,7 @@ namespace MD.Identity
     /// </summary>
     public class AppUser : IdentityUser
     {
+        public byte[] ImageContent { get; set; }
         public IEnumerable<Note> Notes { get; set; }
     }
 }
