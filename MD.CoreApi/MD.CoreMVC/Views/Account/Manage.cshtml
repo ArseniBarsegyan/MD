@@ -1,0 +1,13 @@
+﻿@model ProfileViewModel
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<div class="container">
+    <div class="row">
+        <h2>Your profile</h2>
+        
+        <label asp-for="Email">Your name: @ViewBag.UserName</label><br />
+        <label asp-for="NoteCount">Total notes count: @ViewBag.NoteCount</label>
+    </div>
+</div>

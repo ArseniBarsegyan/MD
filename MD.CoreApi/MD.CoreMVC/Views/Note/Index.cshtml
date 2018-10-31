@@ -1,0 +1,65 @@
+﻿@using System.Globalization
+@model IEnumerable<NoteViewModel>
+
+@{
+    ViewData["Title"] = "Notes";
+}
+
+<div class="container" style="padding-top: 20px;">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="row">
+                    <div class="col-xs-12">
+                        @foreach (var note in Model)
+                        {
+                            <a style="cursor: pointer" class="list-group-item clearfix" id="@note.Id">
+                                <span class="pull-left">
+                                    @if (note.Photos.Any())
+                                    {
+                                        <img src="data:image/gif;base64, @note.Photos[0].Image"
+                                             alt="Note photo"
+                                             class="img-responsive"
+                                             style="max-width: 160px; max-height: 100px;" />
+                                    }
+                                </span>
+                                <div class="pull-right text-container">
+                                    <h4 class="list-group-item-heading">@note.Date.ToString("MMM d, yyyy", new CultureInfo("en-GB"))</h4>
+                                    <p class="list-group-item-text">@note.Description</p>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7" id="noteDetails">
+            <h2>No note selected</h2>
+        </div>
+    </div>
+
+    <a asp-action="Create" asp-controller="Note" class="round-button"><h1>+</h1></a>
+    <!-- Loading indicator -->
+    <div class="loader"></div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".loader").hide();
+            $(".list-group-item").click(function () {
+                $(".loader").show();
+                $(this.parentElement.children).removeClass("active");
+                $(this).addClass("active");
+                $(this).css({ "z-index": 0 });
+                $("#noteDetails").load("@Url.Action("Details", "Note")", { "id": this.id });
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <link href="~/css/note/notes.css" type="text/css" rel="stylesheet" />
+    <link href="~/css/Note/details.css" type="text/css" rel="stylesheet" />
+}

@@ -34,5 +34,10 @@ namespace MD.Helpers
         public const string MvcClientName = "MVC Client";
         public static List<string> MvcClientRedirectUris = new List<string> { "http://localhost:51866/signin-oidc" };
         public static List<string> MvcClientPostLogoutRedirectUris = new List<string> { "http://localhost:51866/signout-callback-oidc" };
+
+
+        public const string IncorrectLoginOrPassword = "Incorrect Login or Password";
+        public const string NoteDescriptionRequired = "Note description required";
+        public const string RememberMe = "Remember me";
     }
 }

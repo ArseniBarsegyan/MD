@@ -1,0 +1,40 @@
+﻿@model CreateNoteViewModel
+@{
+    ViewData["Title"] = "New note";
+}
+
+<div class="container">
+    <div class="col-xs-8">
+        <h2>New note</h2>
+        <hr />
+    
+        <form asp-action="Create" asp-controller="Note" method="post" enctype="multipart/form-data">
+            <span asp-validation-for="Description"></span>
+            <textarea asp-for="Description" class="form-control" placeholder="description"></textarea>
+
+            <div class="form-group">
+                <input type="file" id="photos" name="Photos" class="upload" multiple />
+                <label for="photos">Pick photos...</label>
+                <label id="fileNames"></label>
+            </div>
+
+            <input type="submit" class="button button-info" value="Create">
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#photos").change(function() {
+                var files = $("#photos").prop("files");
+                var names = $.map(files, function (val) { return val.name; });
+                $("#fileNames").text(names);
+            });
+        })
+    </script>
+}
+
+@section Styles {
+    <link href="~/css/note/create.css" type="text/css" rel="stylesheet" />
+}

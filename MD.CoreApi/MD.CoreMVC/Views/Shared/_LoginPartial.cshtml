@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MD.Identity
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+        <ul class="topnav-right">
+            <li class="dropdown">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                    Hello, @UserManager.GetUserName(User) <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-content" asp-controller="Account" asp-action="Manage">Profile</a></li>
+                    <li><a class="dropdown-content" href="javascript:document.getElementById('logoutForm').submit()">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <div class="topnav-right">
+        <a asp-area="" asp-controller="Account" asp-action="Register" id="registerLink">SignUp</a>
+        <a asp-area="" asp-controller="Account" asp-action="Login" id="loginLink">SignIn</a>
+    </div>
+}

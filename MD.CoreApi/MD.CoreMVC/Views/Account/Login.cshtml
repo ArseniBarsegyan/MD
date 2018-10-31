@@ -1,0 +1,37 @@
+﻿@model LoginViewModel
+
+<div class="header">
+    <div class="container">
+        <h2>SignIn</h2>
+        <hr />
+        <form method="post" asp-controller="Account" asp-action="Login"
+              asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div>
+                <label asp-for="Email"></label><br />
+                <input asp-for="Email" class="form-control input-control" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label><br />
+                <input asp-for="Password" class="form-control input-control" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <label asp-for="RememberMe"></label>
+            <!-- Rectangular switch -->
+            <div>
+                <label class="switch">
+                    <input type="checkbox" asp-for="RememberMe">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="Login" style="width: 250px;" class="button button-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <link href="~/css/Account/login.css" type="text/css" rel="stylesheet" />
+}
