@@ -1,9 +1,16 @@
 # MD.CoreApi
-.Net Core Web API project.
-This part consists of:
-- Separated DAL-layer and project for Migrations
-- Identity layer for Identity framework
-- Identity Server for OAuth users authentication 
-- WebAPI for creating user account
-- WebAPI for creating and storing notes with images/photos
-- Demo console client for accessing WebAPI with credentials
+Project contains layers:
+Data layer:
+- MD.Data
+- MD.Identity
+- MD.Helpers
+Identity layer:
+- MD.IdentityServer
+Services:
+- MD.CoreApi
+- MD.RegistrationApi
+Clients:
+ desktop:
+ - WPF
+ mobile:
+ - Cross-platform mobile application on Xamarin Forms
