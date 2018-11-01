@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:orientation="vertical"
+              android:background="@drawable/alertdialog_bg"
+              android:layout_width="300dp"
+              android:layout_height="match_parent"
+              android:paddingTop="30dp">
+  <LinearLayout android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="30dp"
+                android:id="@+id/linearLayout2">
+    <ImageView android:id="@+id/questionImage"
+               android:src="@drawable/QuestionIcon"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginRight="20dp"
+               android:layout_marginLeft="10dp"
+               android:layout_gravity="start" />
+    <TextView android:id="@+id/yesNoText"
+              android:text="Question?"
+              android:textSize="16sp"
+              android:minLines="2"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:textColor="#302f2f"
+              android:layout_gravity="center" />
+  </LinearLayout>
+  <LinearLayout android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+    <Button android:id="@+id/yesNoApplyButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Yes"
+            android:textAllCaps="false"
+            android:layout_gravity="bottom"
+            android:textColor="#fafafa"
+            android:background="@drawable/alertdialog_yes_button_bg" />
+    <Button android:id="@+id/yesNoRejectButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="No"
+            android:textAllCaps="false"
+            android:layout_gravity="bottom"
+            android:textColor="#FF5252"
+            android:background="@drawable/alertdialog_no_button_bg" />
+  </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:orientation="vertical"
+              android:background="@drawable/alertdialog_bg"
+              android:layout_width="300dp"
+              android:layout_height="match_parent"
+              android:paddingTop="30dp">
+  <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="30dp"
+    android:id="@+id/linearLayout2">
+    <ImageView
+      android:id="@+id/alertImage"
+      android:src="@drawable/OkIcon"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginRight="20dp"
+      android:layout_marginLeft="10dp"
+      android:layout_gravity="start" />
+    <TextView
+      android:id="@+id/alertText"
+      android:text="Empty description"
+      android:textSize="16sp"
+      android:minLines="2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textColor="#302f2f"
+      android:layout_gravity="center" />
+  </LinearLayout>
+  <Button
+    android:id="@+id/alertApplyButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Ok"
+    android:textAllCaps="false"
+    android:layout_gravity="bottom"
+    android:textColor="#fafafa"
+    android:background="@drawable/alertdialog_button_bg" />
+</LinearLayout>
