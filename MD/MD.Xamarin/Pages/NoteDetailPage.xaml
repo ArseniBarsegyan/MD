@@ -2,8 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:extensions="clr-namespace:MD.Xamarin.Extensions;assembly=MD.Xamarin"
-             xmlns:elements="clr-namespace:MD.Xamarin.Elements;assembly=MD.Xamarin"
-             xmlns:behaviors="clr-namespace:MD.Xamarin.Behaviors;assembly=MD.Xamarin"
              x:Class="MD.Xamarin.Pages.NoteDetailPage"
              Title="{extensions:Translate EditNote}">
     <ContentPage.Content>
@@ -15,13 +13,7 @@
                        HeightRequest="100"
                        Aspect="AspectFit"/>
                 <ScrollView VerticalOptions="FillAndExpand">
-                    <elements:EditorWithPlaceholder HorizontalOptions="FillAndExpand"
-                                                    Placeholder="Edit description"
-                                                    Text="{Binding Description}">
-                        <elements:EditorWithPlaceholder.Behaviors>
-                            <behaviors:EditorWithPlaceholderBehavior />
-                        </elements:EditorWithPlaceholder.Behaviors>
-                    </elements:EditorWithPlaceholder>
+                    <Editor HorizontalOptions="FillAndExpand" Text="{Binding Description}" />
                 </ScrollView>
             </StackLayout>
 

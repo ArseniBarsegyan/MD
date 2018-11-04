@@ -16,9 +16,10 @@
     <ContentPage.Content>
         <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
             <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
-                <Image x:Name="Image" 
+                <Image x:Name="FirstPhoto" 
                        Source="{Binding Photos, Converter={StaticResource FirstPhotoInListToImageConverter}}"
                        WidthRequest="100"
+                       IsVisible="False"
                        HeightRequest="100"
                        Aspect="AspectFit"/>
                 <ScrollView VerticalOptions="FillAndExpand">

@@ -29,6 +29,7 @@ namespace MD.Xamarin.Pages
                 return;
             }
             ViewModel.PickPhotoCommand.Execute(document);
+            FirstPhoto.IsVisible = true;
         }
     }
 }
