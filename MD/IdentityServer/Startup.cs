@@ -42,7 +42,7 @@ namespace IdentityServer
                 options.UseSqlServer(connectionString));
 
             var opt = new DbContextOptionsBuilder().UseSqlServer(connectionString);
-            services.AddTransient(s => new AppIdentityDbContext(opt.Options, "dbo"));
+            services.AddTransient(s => new AppIdentityDbContext(opt.Options, ConstantsHelper.ContextShemaName));
 
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -84,7 +84,12 @@ namespace IdentityServer
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseIdentityServer();
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Account}/{action=Login}/{id?}");
+            });
         }
     }
 }
