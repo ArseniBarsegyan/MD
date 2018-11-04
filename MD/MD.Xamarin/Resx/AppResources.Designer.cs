@@ -241,6 +241,15 @@ namespace MD.Xamarin.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error while login to server.
+        /// </summary>
+        internal static string OAuthLoginError {
+            get {
+                return ResourceManager.GetString("OAuthLoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
         internal static string Ok {

@@ -213,4 +213,7 @@
   <data name="ImagePickErrorMesssage" xml:space="preserve">
     <value>Пожалуйста, выберите картинку</value>
   </data>
+  <data name="OAuthLoginError" xml:space="preserve">
+    <value>Ошибка при входе в сервис</value>
+  </data>
 </root>

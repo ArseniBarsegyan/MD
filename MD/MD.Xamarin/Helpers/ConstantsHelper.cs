@@ -24,6 +24,7 @@
 
         public const string NoteDeleteMessage = "NoteDeleteMessage";
 
+        public const string OAuthLoginError = "OAuthLoginError";
         public const string Ok = "Ok";
         public const string PasswordEmptyMessage = "PasswordEmptyMessage";
         public const string PasswordsDoesNotMatchMessage = "PasswordsDoesNotMatchMessage";

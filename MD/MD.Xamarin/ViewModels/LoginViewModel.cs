@@ -79,6 +79,11 @@ namespace MD.Xamarin.ViewModels
             {
                 Settings.UserAccessToken = tokenResponse.AccessToken;
             }
+            else
+            {
+                var oauthLoginErrorMessageLocalized = Resmgr.Value.GetString(ConstantsHelper.OAuthLoginError, _cultureInfo);
+                _alertService.ShowOkAlert(oauthLoginErrorMessageLocalized, ConstantsHelper.Ok);
+            }
             _loadingService.HideLoading();
         }
 

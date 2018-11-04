@@ -213,4 +213,7 @@
   <data name="ImagePickErrorMesssage" xml:space="preserve">
     <value>Please, select image</value>
   </data>
+  <data name="OAuthLoginError" xml:space="preserve">
+    <value>Error while login to server</value>
+  </data>
 </root>
