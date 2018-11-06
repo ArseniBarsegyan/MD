@@ -16,7 +16,7 @@ namespace MD.Helpers
         public const string AuthenticationType = "Bearer";
         public const string CorsPolicy = "CorsPolicy";
         public const string IdentityServerUrl = "https://identityserver20181030042351.azurewebsites.net/";
-        public const string ReleaseVersionConnection = "AzureDatabaseConnection";
+        public const string ReleaseVersionConnection = "ReleaseVersionConnection";
 
         // Angular client constants
         public const string AngularClientId = "Angular_client";

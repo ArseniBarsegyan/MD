@@ -47,7 +47,7 @@ namespace MD.CoreApi
             var opt = new DbContextOptionsBuilder().UseSqlServer(connectionString);
             services.AddTransient(s => new AppIdentityDbContext(opt.Options, ConstantsHelper.ContextShemaName));
 
-            services.AddTransient<IRepository<Note>, NoteRepository>((ctx) =>
+            services.AddTransient<IRepository<Note>, NoteRepository>(ctx =>
             {
                 var context = ctx.GetService<AppIdentityDbContext>();
                 return new NoteRepository(context);
