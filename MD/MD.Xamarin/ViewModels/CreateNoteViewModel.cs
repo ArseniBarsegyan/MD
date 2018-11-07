@@ -63,8 +63,11 @@ namespace MD.Xamarin.ViewModels
             
             // await App.NoteRepository.CreateAsync(noteModel);
             // await App.NoteRepository.SaveAsync();
-            await NotesService.Create(noteModel);
-            MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
+            var result = await NotesService.Create(noteModel);
+            if (result)
+            {
+                MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
+            }
         }
 
         private async Task PickPhotoCommandExecute(PlatformDocument document)

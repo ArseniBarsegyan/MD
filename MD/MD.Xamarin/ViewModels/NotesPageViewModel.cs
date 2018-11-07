@@ -14,7 +14,11 @@ namespace MD.Xamarin.ViewModels
         {
             RefreshCommand = new Command(async c => await RefreshCommandExecute());
             DeleteNoteCommand = new Command<int>(async id => await DeleteNoteCommandExecute(id));
-            RefreshCommand.Execute(null);
+            Task.Run(async () =>
+            {
+                var noteModels = await NotesService.GetNotes();
+                Notes = new ObservableCollection<NoteModel>(noteModels);
+            });
         }
 
         public bool IsRefreshing { get; set; }
@@ -41,13 +45,14 @@ namespace MD.Xamarin.ViewModels
             bool result = await AlertService.ShowYesNoAlert(noteDeleteMessageLocalized, okLocalized, cancelLocalized);
             if (result)
             {
-                await NotesService.DeleteNote(id);
-
+                var deleteResult = await NotesService.DeleteNote(id);
+                if (deleteResult)
+                {
+                    MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
+                }
                 //await App.NoteRepository.DeleteAsync(id);
                 //await App.NoteRepository.SaveAsync();
             }
-            
-            MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
         }
     }
 }

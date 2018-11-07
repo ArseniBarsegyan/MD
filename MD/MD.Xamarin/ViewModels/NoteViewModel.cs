@@ -33,16 +33,13 @@ namespace MD.Xamarin.ViewModels
 
             if (result)
             {
-                var noteUpdateMessageLocalized = Resmgr.Value.GetString(ConstantsHelper.NoteUpdateSuccessful, ci);
-                AlertService.ShowOkAlert(noteUpdateMessageLocalized, okLocalized);
+                MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
             }
             else
             {
                 var noteUpdateErrorMessageLocalized = Resmgr.Value.GetString(ConstantsHelper.NoteUpdateError, ci);
                 AlertService.ShowOkAlert(noteUpdateErrorMessageLocalized, okLocalized);
             }
-
-            MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
         }
     }
 }
