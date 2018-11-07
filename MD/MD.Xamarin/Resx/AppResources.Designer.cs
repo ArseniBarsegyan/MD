@@ -241,6 +241,24 @@ namespace MD.Xamarin.Resx {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during note update.
+        /// </summary>
+        internal static string NoteUpdateError {
+            get {
+                return ResourceManager.GetString("NoteUpdateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note updated.
+        /// </summary>
+        internal static string NoteUpdateSuccessful {
+            get {
+                return ResourceManager.GetString("NoteUpdateSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error while login to server.
         /// </summary>
         internal static string OAuthLoginError {

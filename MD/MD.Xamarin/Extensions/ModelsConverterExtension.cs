@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using MD.Xamarin.EF.Models;
+using MD.Xamarin.Models;
 using MD.Xamarin.ViewModels;
 
 namespace MD.Xamarin.Extensions
@@ -11,9 +11,9 @@ namespace MD.Xamarin.Extensions
         // ----------------------------------------
         // -------- Photo models converters --------
         // ----------------------------------------
-        public static Photo ToPhotoModel(this PhotoViewModel viewModel)
+        public static PhotoModel ToPhotoModel(this PhotoViewModel viewModel)
         {
-            var model = new Photo
+            var model = new PhotoModel
             {
                 Id = viewModel.Id,
                 Image = viewModel.Image,
@@ -23,7 +23,7 @@ namespace MD.Xamarin.Extensions
             return model;
         }
 
-        public static PhotoViewModel ToPhotoViewModel(this Photo model)
+        public static PhotoViewModel ToPhotoViewModel(this PhotoModel model)
         {
             var viewModel = new PhotoViewModel
             {
@@ -35,12 +35,12 @@ namespace MD.Xamarin.Extensions
             return viewModel;
         }
 
-        public static IEnumerable<Photo> ToPhotoModels(this IEnumerable<PhotoViewModel> viewModels)
+        public static IEnumerable<PhotoModel> ToPhotoModels(this IEnumerable<PhotoViewModel> viewModels)
         {
             return viewModels.Select(viewModel => viewModel.ToPhotoModel()).ToList();
         }
 
-        public static IEnumerable<PhotoViewModel> ToPhotoViewModels(this IEnumerable<Photo> models)
+        public static IEnumerable<PhotoViewModel> ToPhotoViewModels(this IEnumerable<PhotoModel> models)
         {
             return models.Select(model => model.ToPhotoViewModel()).ToList();
         }
@@ -48,20 +48,20 @@ namespace MD.Xamarin.Extensions
         // ----------------------------------------
         // -------- Note models converters --------
         // ----------------------------------------
-        public static Note ToNoteModel(this NoteViewModel viewModel)
+        public static NoteModel ToNoteModel(this NoteViewModel viewModel)
         {
-            var model = new Note
+            var model = new NoteModel
             {
                 Id = viewModel.Id,
                 Date = viewModel.Date,
                 Description = viewModel.Description,
                 UserId = viewModel.UserId,
-                Photos = viewModel.Photos.ToPhotoModels()
+                Photos = viewModel.Photos.ToPhotoModels().ToArray()
             };
             return model;
         }
 
-        public static NoteViewModel ToNoteViewModel(this Note model)
+        public static NoteViewModel ToNoteViewModel(this NoteModel model)
         {
             var viewModel = new NoteViewModel
             {
@@ -74,12 +74,12 @@ namespace MD.Xamarin.Extensions
             return viewModel;
         }
 
-        public static IEnumerable<Note> ToNoteModels(this IEnumerable<NoteViewModel> viewModels)
+        public static IEnumerable<NoteModel> ToNoteModels(this IEnumerable<NoteViewModel> viewModels)
         {
             return viewModels.Select(viewModel => viewModel.ToNoteModel()).ToList();
         }
 
-        public static IEnumerable<NoteViewModel> ToNoteViewModels(this IEnumerable<Note> models)
+        public static IEnumerable<NoteViewModel> ToNoteViewModels(this IEnumerable<NoteModel> models)
         {
             return models.Select(model => model.ToNoteViewModel()).ToList();
         }

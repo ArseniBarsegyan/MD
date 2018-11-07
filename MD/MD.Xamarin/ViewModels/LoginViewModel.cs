@@ -85,9 +85,6 @@ namespace MD.Xamarin.ViewModels
                 _alertService.ShowOkAlert(oauthLoginErrorMessageLocalized, ConstantsHelper.Ok);
             }
             _loadingService.HideLoading();
-
-            var restClient = new RestClient();
-            var result = await restClient.GetNotes();
         }
 
         private bool AreFieldsValid()

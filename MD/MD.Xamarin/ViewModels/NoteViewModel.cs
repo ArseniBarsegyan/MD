@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MD.Xamarin.Extensions;
 using MD.Xamarin.Helpers;
+using Plugin.Multilingual;
 using Xamarin.Forms;
 
 namespace MD.Xamarin.ViewModels
@@ -25,8 +26,22 @@ namespace MD.Xamarin.ViewModels
 
         private async Task UpdateCommandExecute()
         {
-            await App.NoteRepository.Update(this.ToNoteModel());
-            await App.NoteRepository.SaveAsync();
+            var ci = CrossMultilingual.Current.CurrentCultureInfo;
+            var okLocalized = Resmgr.Value.GetString(ConstantsHelper.Ok);
+
+            var result = await NotesService.UpdateNote(Id, this.ToNoteModel());
+
+            if (result)
+            {
+                var noteUpdateMessageLocalized = Resmgr.Value.GetString(ConstantsHelper.NoteUpdateSuccessful, ci);
+                AlertService.ShowOkAlert(noteUpdateMessageLocalized, okLocalized);
+            }
+            else
+            {
+                var noteUpdateErrorMessageLocalized = Resmgr.Value.GetString(ConstantsHelper.NoteUpdateError, ci);
+                AlertService.ShowOkAlert(noteUpdateErrorMessageLocalized, okLocalized);
+            }
+
             MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
         }
     }

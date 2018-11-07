@@ -1,5 +1,7 @@
 ﻿using System;
+using MD.Xamarin.Extensions;
 using MD.Xamarin.Helpers;
+using MD.Xamarin.Models;
 using MD.Xamarin.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -40,19 +42,20 @@ namespace MD.Xamarin.Pages
 
         private async void NotesList_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var noteViewModel = NotesList.SelectedItem as NoteViewModel;
+            var noteModel = NotesList.SelectedItem as NoteModel;
+
             NotesList.SelectedItem = null;
-            if (noteViewModel != null)
+            if (noteModel != null)
             {
-                await Navigation.PushAsync(new NoteDetailPage(noteViewModel));
+                await Navigation.PushAsync(new NoteDetailPage(noteModel.ToNoteViewModel()));
             }
         }
 
         private void Delete_OnClicked(object sender, EventArgs e)
         {
             var menuItem = sender as MenuItem;
-            var noteViewModel = menuItem?.CommandParameter as NoteViewModel;
-            ViewModel.DeleteNoteCommand.Execute(noteViewModel?.Id);
+            var noteModel = menuItem?.CommandParameter as NoteModel;
+            ViewModel.DeleteNoteCommand.Execute(noteModel?.Id);
         }
     }
 }

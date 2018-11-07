@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MD.Xamarin.EF.Models;
 using MD.Xamarin.Extensions;
 using MD.Xamarin.Helpers;
 using MD.Xamarin.Interfaces;
 using MD.Xamarin.Interfaces.FilePickerService;
+using MD.Xamarin.Models;
 using Plugin.Multilingual;
 using Xamarin.Forms;
 
@@ -49,21 +47,23 @@ namespace MD.Xamarin.ViewModels
                 _alertService.ShowOkAlert(descriptionEmptyMessageLocalized, ConstantsHelper.Ok);
                 return;
             }
-            var noteModel = new Note
+            var noteModel = new NoteModel
             {
-                UserId = Settings.CurrentUserId,
+                // UserId = Settings.CurrentUserId,
+                UserId = "05f9947f-6e27-44fc-a7d7-16c2f9189331",
                 Description = Description,
                 Date = DateTime.Now
             };
             var photosModels = Photos.ToPhotoModels();
-            foreach (var photoModel in photosModels)
-            {
-                photoModel.Note = noteModel;
-            }
-            noteModel.Photos = photosModels;
+            //foreach (var photoModel in photosModels)
+            //{
+            //    photoModel.Note = noteModel;
+            //}
+            noteModel.Photos = photosModels.ToArray();
             
-            await App.NoteRepository.CreateAsync(noteModel);
-            await App.NoteRepository.SaveAsync();
+            // await App.NoteRepository.CreateAsync(noteModel);
+            // await App.NoteRepository.SaveAsync();
+            await NotesService.Create(noteModel);
             MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);
         }
 
@@ -80,7 +80,7 @@ namespace MD.Xamarin.ViewModels
 
                 var resizedImage = mediaService.ResizeImage(imageContent, ConstantsHelper.ResizedImageWidth,
                     ConstantsHelper.ResizedImageHeight);
-                var photoModel = new Photo
+                var photoModel = new PhotoModel
                 {
                     Name = document.Name,
                     Image = Convert.ToBase64String(resizedImage)

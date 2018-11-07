@@ -216,4 +216,10 @@
   <data name="OAuthLoginError" xml:space="preserve">
     <value>Error while login to server</value>
   </data>
+  <data name="NoteUpdateSuccessful" xml:space="preserve">
+    <value>Note updated</value>
+  </data>
+  <data name="NoteUpdateError" xml:space="preserve">
+    <value>Error during note update</value>
+  </data>
 </root>

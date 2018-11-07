@@ -1,10 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MD.Xamarin.Extensions;
 using MD.Xamarin.Helpers;
-using MD.Xamarin.Interfaces;
+using MD.Xamarin.Models;
 using Plugin.Multilingual;
 using Xamarin.Forms;
 
@@ -12,29 +10,24 @@ namespace MD.Xamarin.ViewModels
 {
     public class NotesPageViewModel : BaseViewModel
     {
-        private static readonly IAlertService AlertService = DependencyService.Get<IAlertService>();
-
         public NotesPageViewModel()
         {
-            Notes = new ObservableCollection<NoteViewModel>(App.NoteRepository
-                .GetAll(Settings.CurrentUserId)
-                .ToList()
-                .ToNoteViewModels());
-            RefreshCommand = new Command(RefreshCommandExecute);
+            RefreshCommand = new Command(async c => await RefreshCommandExecute());
             DeleteNoteCommand = new Command<int>(async id => await DeleteNoteCommandExecute(id));
+            RefreshCommand.Execute(null);
         }
 
         public bool IsRefreshing { get; set; }
-        public ObservableCollection<NoteViewModel> Notes { get; set; }
+        public ObservableCollection<NoteModel> Notes { get; set; }
 
         public ICommand RefreshCommand { get; set; }
         public ICommand DeleteNoteCommand { get; set; }
 
-        private void RefreshCommandExecute()
+        private async Task RefreshCommandExecute()
         {
             IsRefreshing = true;
-            var noteViewModels = App.NoteRepository.GetAll(Settings.CurrentUserId).ToList().ToNoteViewModels();
-            Notes = new ObservableCollection<NoteViewModel>(noteViewModels);
+            var noteModels = await NotesService.GetNotes();
+            Notes = new ObservableCollection<NoteModel>(noteModels);
             IsRefreshing = false;
         }
 
@@ -48,8 +41,10 @@ namespace MD.Xamarin.ViewModels
             bool result = await AlertService.ShowYesNoAlert(noteDeleteMessageLocalized, okLocalized, cancelLocalized);
             if (result)
             {
-                await App.NoteRepository.DeleteAsync(id);
-                await App.NoteRepository.SaveAsync();
+                await NotesService.DeleteNote(id);
+
+                //await App.NoteRepository.DeleteAsync(id);
+                //await App.NoteRepository.SaveAsync();
             }
             
             MessagingCenter.Send(this, ConstantsHelper.ShouldUpdateUI);

@@ -8,7 +8,6 @@
         public const string ApiName = "MD.CoreApi";
         public const string IdentityServerUrl = "https://identityserver20181030042351.azurewebsites.net/";
 
-
         public const string CreateNotePageTitle = "CreateNotePageTitle";
         public const string Cancel = "Cancel";
         public const string DescriptionEmptyMessage = "DescriptionEmptyMessage";
@@ -23,6 +22,8 @@
         public const string LoginSuccessful = "LoginSuccessful";
 
         public const string NoteDeleteMessage = "NoteDeleteMessage";
+        public const string NoteUpdateError = "NoteUpdateError";
+        public const string NoteUpdateSuccessful = "NoteUpdateSuccessful";
 
         public const string OAuthLoginError = "OAuthLoginError";
         public const string Ok = "Ok";

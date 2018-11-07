@@ -33,5 +33,71 @@ namespace MD.XamarinTestApi.Controllers
             }
             return allNotes;
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var note = await _repository.GetByIdAsync(id);
+            if (note == null)
+            {
+                return NotFound();
+            }
+            foreach (var photo in note.Photos)
+            {
+                photo.Note = null;
+            }
+            return Ok(note);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody]Note note)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = note;
+                }
+
+                note.UserId = "05f9947f-6e27-44fc-a7d7-16c2f9189331";
+                await _repository.CreateAsync(note);
+                await _repository.SaveAsync();
+
+                foreach (var photo in note.Photos)
+                {
+                    photo.Note = null;
+                }
+                return Ok(note);
+            }
+            return BadRequest();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody]Note note)
+        {
+            if (note == null)
+            {
+                return BadRequest();
+            }
+            _repository.Update(note);
+            await _repository.SaveAsync();
+            return Ok(note);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _repository.DeleteAsync(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            await _repository.SaveAsync();
+            return Ok(result);
+        }
     }
 }

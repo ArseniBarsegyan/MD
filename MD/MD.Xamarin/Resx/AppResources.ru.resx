@@ -216,4 +216,10 @@
   <data name="OAuthLoginError" xml:space="preserve">
     <value>Ошибка при входе в сервис</value>
   </data>
+  <data name="NoteUpdateSuccessful" xml:space="preserve">
+    <value>Заметка обновлена</value>
+  </data>
+  <data name="NoteUpdateError" xml:space="preserve">
+    <value>Не удалось обновить заметку</value>
+  </data>
 </root>
