@@ -67,10 +67,10 @@ namespace MD.CoreMVC
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
+            app.UseHttpsRedirection();
 
             app.UseMvc(routes =>
             {

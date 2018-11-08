@@ -5,7 +5,8 @@
              xmlns:extensions="clr-namespace:MD.Xamarin.Extensions;assembly=MD.Xamarin"
              xmlns:elements="clr-namespace:MD.Xamarin.Elements;assembly=MD.Xamarin"
              x:Class="MD.Xamarin.Pages.NotesPage"
-             Title="{extensions:Translate Notes}">
+             Title="{extensions:Translate Notes}"
+             Padding="10">
     <ContentPage.BindingContext>
         <viewModels:NotesPageViewModel x:Name="ViewModel" />
     </ContentPage.BindingContext>
@@ -37,7 +38,7 @@
                                           CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                             <elements:ContentViewWithBorder BorderColor="{StaticResource ControlsBorder}">
-                                <StackLayout>
+                                <StackLayout Padding="20,10">
                                     <elements:ExtendedLabel HorizontalOptions="Start" 
                                                             Lines="3" 
                                                             LineSpacing="1.1" 
