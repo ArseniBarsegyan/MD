@@ -25,13 +25,7 @@ namespace MD.CoreApi.Controllers
         {
             var userId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
             var allNotes = _repository.GetAll(userId).OrderByDescending(x => x.Id).ToList();
-            foreach (var note in allNotes)
-            {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
-            }
+            Parallel.ForEach(allNotes, note => { Parallel.ForEach(note.Photos, photo => photo.Note = null); });
             return allNotes;
         }
 
@@ -47,10 +41,7 @@ namespace MD.CoreApi.Controllers
             {
                 return NotFound();
             }
-            foreach (var photo in note.Photos)
-            {
-                photo.Note = null;
-            }
+            Parallel.ForEach(note.Photos, photo => { photo.Note = null; });
             return Ok(note);
         }
 
@@ -59,20 +50,14 @@ namespace MD.CoreApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = note;
-                }
+                Parallel.ForEach(note.Photos, photo => { photo.Note = note; });
 
                 var userId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
                 note.UserId = userId;
                 await _repository.CreateAsync(note);
                 await _repository.SaveAsync();
 
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
+                Parallel.ForEach(note.Photos, photo => { photo.Note = null; });
                 return Ok(note);
             }
             return BadRequest();
@@ -98,6 +83,7 @@ namespace MD.CoreApi.Controllers
             {
                 return NotFound();
             }
+            Parallel.ForEach(result.Photos, photo => { photo.Note = null; });
             await _repository.SaveAsync();
             return Ok(result);
         }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MD.Data;
@@ -24,13 +23,7 @@ namespace MD.XamarinTestApi.Controllers
         public ActionResult<IEnumerable<Note>> Get()
         {
             var allNotes = _repository.GetAll("05f9947f-6e27-44fc-a7d7-16c2f9189331").OrderByDescending(x => x.Id).ToList();
-            foreach (var note in allNotes)
-            {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
-            }
+            Parallel.ForEach(allNotes, note => { Parallel.ForEach(note.Photos, photo => photo.Note = null); } );
             return allNotes;
         }
 
@@ -46,10 +39,8 @@ namespace MD.XamarinTestApi.Controllers
             {
                 return NotFound();
             }
-            foreach (var photo in note.Photos)
-            {
-                photo.Note = null;
-            }
+            Parallel.ForEach(note.Photos, photo => { photo.Note = null; });
+
             return Ok(note);
         }
 
@@ -58,19 +49,13 @@ namespace MD.XamarinTestApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = note;
-                }
+                Parallel.ForEach(note.Photos, photo => { photo.Note = note; });
 
                 note.UserId = "05f9947f-6e27-44fc-a7d7-16c2f9189331";
                 await _repository.CreateAsync(note);
                 await _repository.SaveAsync();
 
-                foreach (var photo in note.Photos)
-                {
-                    photo.Note = null;
-                }
+                Parallel.ForEach(note.Photos, photo => { photo.Note = null; });
                 return Ok(note);
             }
             return BadRequest();
@@ -96,6 +81,7 @@ namespace MD.XamarinTestApi.Controllers
             {
                 return NotFound();
             }
+            Parallel.ForEach(result.Photos, photo => { photo.Note = null; });
             await _repository.SaveAsync();
             return Ok(result);
         }
