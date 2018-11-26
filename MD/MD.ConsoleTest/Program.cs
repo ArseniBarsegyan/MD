@@ -30,7 +30,7 @@ namespace MD.ConsoleTest
             HttpClient client = new HttpClient();
             client.SetBearerToken(tokenResponse.AccessToken);
 
-            var response = await client.GetAsync(ConstantsHelper.ApiUrl);
+            var response = await client.GetAsync(ConstantsHelper.CoreApiUrl);
             var content = await response.Content.ReadAsStringAsync();
             Console.WriteLine(JArray.Parse(content));
             Console.ReadKey();

@@ -11,11 +11,15 @@ namespace MD.Helpers
         public const string PasswordErrorMessage = "PASSWORD_MIN_LENGTH";
         public const string PasswordIncorrect = "Password incorrect";
 
-        public const string ApiUrl = "https://localhost:44350/api/notes";
+        // Applications URLs
+        public const string CoreApiUrl = "http://localhost:53498/api/notes";
+        public const string RegistrationApiApiUrl = "http://localhost:53497/";
+        public const string IdentityServerUrl = "http://localhost:53496/";
+        public const string MvcAppUrl = "http://localhost:53488/";
+
         public const string ApiName = "MD.CoreApi";
         public const string AuthenticationType = "Bearer";
         public const string CorsPolicy = "CorsPolicy";
-        public const string IdentityServerUrl = "https://identityserver20181030042351.azurewebsites.net/";
         public const string ReleaseVersionConnection = "ReleaseVersionConnection";
 
         // Angular client constants
@@ -34,7 +38,6 @@ namespace MD.Helpers
         public const string MvcClientName = "MVC Client";
         public static List<string> MvcClientRedirectUris = new List<string> { "http://localhost:51866/signin-oidc" };
         public static List<string> MvcClientPostLogoutRedirectUris = new List<string> { "http://localhost:51866/signout-callback-oidc" };
-
 
         public const string IncorrectLoginOrPassword = "Incorrect Login or Password";
         public const string NoteDescriptionRequired = "Note description required";
