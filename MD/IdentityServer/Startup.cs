@@ -84,12 +84,7 @@ namespace IdentityServer
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseIdentityServer();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Account}/{action=Login}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
